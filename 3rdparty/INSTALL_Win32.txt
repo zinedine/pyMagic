@@ -1,0 +1,72 @@
+3rdparty Dependancies for Win32
+===============================
+
+This doc describes how to build and install the following:
+
+SIP
+PyQt
+
+Python
+======
+
+Grab the standard 32 build of Python build from somewhere.  I'll assume its installed here:
+	C:\Python27
+
+Notice: 32 bit, even if you are running on a 64 bit OS - because the SIP and PyQt builds will build X86 code. 
+
+
+Qt 4.7.3
+========
+
+Just grab a 4.7.x release of Qt from the Nokia website and install it.  I'll assume the path you install to is something like:
+	C:\Qt\4.7.3
+	
+for the rest of this document.
+
+Environment
+===========
+
+Make sure the following things are on your path:
+- qmake 
+- visual studio
+
+To do this, run a script something like this:
+set PATH=c:\Python27;%PATH%
+set PATH=C:\Qt\4.7.3\bin;%PATH%
+call c:\vs9\vc\bin\vcvars32.bat
+
+SIP
+===
+
+First; uncompress the SIP code that you got as a ZIP file.
+
+Then do this:
+	cd sip-4.13
+	python configure.py
+	nmake
+	nmake install
+
+To test it worked:
+	python
+	>>> import sip
+	>>>
+	
+If you get ZERO errors, it worked OK.
+	
+PyQt (it relies on the above two)
+=================================
+
+First, uncompress the PyQt code - then run then do this:
+	cd PyQt-win-gpl-4.8.6
+	python configure.py
+	nmake
+	nmake install
+
+If you want to test that PyQt is working properly:
+    python
+    from PyQt4.Qt import *
+    a = QApplication([])
+
+if you get errors, PyQt installation failed.
+
+Now you are in theory, good to go.

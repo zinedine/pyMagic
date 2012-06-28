@@ -1,0 +1,56 @@
+possibilities:
+    inst -> new scan -> done-screen -> re-scan
+    inst -> select for re-scan
+    re-scan -> create-fileset
+    create-fileset -> quit
+    create-fileset -> re-scan
+    create-fileset -> export
+
+instructions
+    - show the "new scan" & "create fileset" options
+    
+-----------------------------------------------------------
+new scan (before installing software)
+	- get name of scan & things to scan (can change name later)
+	- show progress of the scan
+	- show a "done" screen, install software now then press "next"
+	- if the scan is finished, and app is quit, go to "select for re-scan"
+	- if they press "next", then we can go to "re-scan"
+actions:
+    - create scan
+    - once scan is done, can go to "re-scan"
+outputs:
+    - the name & initial scan document
+
+-----------------------------------------------------------
+select for re-scan
+	- view existing scans & select one, if there is no "second scan" perform scan otherwise go to the "create fileset" stage
+	- go to re-scan
+
+-----------------------------------------------------------
+re-scan after install (after installing software)
+	- perform another scan using the same directories
+actions:
+    - do second scan, then we can go to "create-fileset"
+outputs:
+    - the compare scan contained in the same document
+
+-----------------------------------------------------------
+create fileset:
+	- show the selection UI (defines what to include in a fileset)
+	- the user can quit at any time
+	- the user can perform a "second scan" again if they wish
+	- allow export, this uses a plugin architecture to provide the export types
+
+-----------------------------------------------------------
+export to filewave server:
+    - as a fileset
+    - by merging with an existing fileset
+        - optionally creating a new fileset containing the merged info
+    - as a template (yes, really, so we can re-sell templates)
+
+export to MSI:
+    - as a self contained MSI installer
+
+export to PKG:
+    - as a self contained PKG installer

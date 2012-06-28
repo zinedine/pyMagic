@@ -1,0 +1,33 @@
+To rebuild the installer, following the steps here:
+
+Ensure you have PyInstaller-1.5, and NOT 1.5.1 - this is because the 1.5.1 binaries for PyInstaller (the bootloader) are 64 bit exe's - and that's not gonna work out too well since the rest of the codebase is compiled as at least i386.  This restriction would be relaxed if the entire codebase was running on the same arch (but as of writing, the PyQt/SIP/Qt binaries are compiled as i386).
+
+There's an additional patch you must make to the boot-strapping files in the normal PyInstaller distro, a copy of the ../pyinstaller-1.5/support/rthooks/pyi_rth_qt4plugins.py file is included in this directory.  It basically sets the SIP API compatibility mode to version 2 for QString so that implicit Qt/Python conversions for QString <-> Python String take place.
+
+The PyMagic.spec file lists everything that's required to get a running Mac application.  Worth noting:
+- the plugins/exporters/mac_pkg is never directly imported, instead its imported via code - so this module is explicitly loaded in the .spec file
+
+WARNING: Python wildcard imports
+--------------------------------
+If you find that the running the app on your dev machine in a normal (non pyinstaller generated) environment works fine, but that testing the PyInstaller generated app fails, you may find that its because the code throws an error something along the lines of:
+
+john:install john$ ./MacPyMagic.app/Contents/MacOS/PyMagic 
+page changed, current page id: 9 new id: 9
+page changed, current page id: 1 new id: 1
+QWizard::setField: Couldn't write to property ''
+QWizard::setField: Couldn't write to property ''
+QWizard::setField: Couldn't write to property ''
+QWizard::setField: Couldn't write to property ''
+QWizard::setField: Couldn't write to property ''
+Traceback (most recent call last):
+  File "/Users/john/src/pymagic/install/build/pyi.darwin/PyMagic/outPYZ1.pyz/lib.scanning_controller_thread", line 41, in run
+  File "/Users/john/src/pymagic/install/build/pyi.darwin/PyMagic/outPYZ1.pyz/lib.scanning_controller", line 33, in beginInitialScan
+  File "/Users/john/src/pymagic/install/build/pyi.darwin/PyMagic/outPYZ1.pyz/lib.persistent_scanning_state", line 55, in __init__
+NameError: global name 'QSqlDatabase' is not defined
+
+The reason is that the QSqlDatabase import hasn't been caught by PyInstaller - the solution is to simply optimize the imports in the offending .py file - get rid of the evil and lazy
+        from module.name.goes.here import *
+and replace it with the appropriate imports, ala:
+        from module.name.goes.here import IAmNotALazyProgrammer, QSqlDatabase, AndWhatEverElseIMightNeed
+
+

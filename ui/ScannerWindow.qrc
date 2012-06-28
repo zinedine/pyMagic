@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/FileSet Magic_32.png</file>
+    <file>icons/Registry_32.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,43 @@
+3rdparty Dependancies
+=====================
+
+This doc describes how to build and install the following:
+
+Qt 4.7.x (you'll want to compile this yourself, ensuring its i386 arch)
+SIP
+PyQt
+
+Python
+======
+
+To rebuild the python installation.
+        run the install_python.sh
+script, it'll build python into the 3rdparty directory using the right arch options.
+
+SIP
+===
+
+First; uncompress the SIP code.
+
+Run the install_sip.sh script, it'll build SIP using the Python you just build in the step above.
+
+If you want to test that sip worked (remember to use the right python version):
+    python
+    $ import sip
+    $
+
+if you get errors, SIP installation failed.
+
+PyQt (it relies on the above two)
+=================================
+
+First, uncompress the PyQt code - then run the install_pyqt.sh script file.
+
+If you want to test that PyQt is working properly:
+    python
+    from PyQt4.Qt import *
+    a = QApplication([])
+
+if you get errors, PyQt installation failed.
+
+

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>package_icon.png</file>
+  </qresource>
+</RCC>
+

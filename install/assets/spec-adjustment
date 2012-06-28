@@ -1,0 +1,4 @@
+import sys
+if sys.platform.startswith("darwin"):
+        app = BUNDLE(exe, appname='PyMagic', version='1.0')
+

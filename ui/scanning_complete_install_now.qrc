@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/installer-mac.png</file>
+    <file>icons/install-package.png</file>
+  </qresource>
+</RCC>

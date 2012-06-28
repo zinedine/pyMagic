@@ -1,0 +1,25 @@
+Things that still need doing:
+
+Win32:
+        MSI Packaging Plugin: http://docs.python.org/library/msilib.html
+        Registry scanning on Windows
+        Installer creation on Windows
+
+FS events system - don't bother, it cant be guaranteed in any case
+    for linux: http://pyinotify.sourceforge.net/
+
+Fix size of UI on startup.
+Save position of wizard when it changes
+
+List the drives available for scanning (might be more a Win32 thing perhaps?)
+
+Exporter Plugins:
+        Mac Installer PKG (done)
+        MSI Installer (not started)
+        Fileset Creator (simply create a new fileset - exported to disk)
+        Fileset Merger (as above, but then choose an existing fileset to merge it into)
+ 
+Unit Tests
+==========
+
+in the future I want to mock out the calls to the registry as well, both a simply (haha, simple, yeah, right) hierarchical systems of key/values.

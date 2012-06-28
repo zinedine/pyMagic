@@ -1,0 +1,14 @@
+
+class WizardPage(object):
+	CREATE_NEW = 1
+	FIRST_SCAN_PROGRESS = 2
+	SECOND_SCAN_PROGRESS = 3
+	SCANNING_COMPLETE_INSTALL_NOW = 4
+	LIST_OF_EXISTING_SCANS = 5
+	COMPARE_TWO_SCANS = 6
+	SELECT_EXPORT_TYPE = 7
+	EXPORT_DATA = 8
+	INTRO = 9
+
+	def __init__(self):
+		super(WizardPage, self).__init__()
